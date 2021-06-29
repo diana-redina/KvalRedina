@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище veloclubModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="pokatyshki">
+          <Key>
+            <PropertyRef Name="cod_pokatyshek" />
+          </Key>
+          <Property Name="cod_pokatyshek" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nazvanie" Type="nvarchar" MaxLength="50" />
+          <Property Name="col_vo_km" Type="int" />
+          <Property Name="data" Type="date" />
+          <Property Name="dlitelnosti" Type="int" />
+          <Property Name="sred_skorosti" Type="float" />
+          <Property Name="cod_poverhnosti" Type="int" />
+        </EntityType>
+        <EntityType Name="poverhnosti">
+          <Key>
+            <PropertyRef Name="cod_poverhnosti" />
+          </Key>
+          <Property Name="tip_poverhnosti" Type="nvarchar(max)" />
+          <Property Name="cod_poverhnosti" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="uchastie">
+          <Key>
+            <PropertyRef Name="kod_registracii" />
+          </Key>
+          <Property Name="kod_pokatushek" Type="int" Nullable="false" />
+          <Property Name="kod_uchastnika" Type="int" Nullable="false" />
+          <Property Name="kod_registracii" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ychastnik">
+          <Key>
+            <PropertyRef Name="cod_ucastnika" />
+          </Key>
+          <Property Name="cod_ucastnika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="familia" Type="nvarchar" MaxLength="100" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" />
+          <Property Name="otchestvo" Type="nvarchar" MaxLength="10" />
+          <Property Name="tip_velo" Type="nvarchar" MaxLength="50" />
+          <Property Name="stagh" Type="int" />
+        </EntityType>
+        <Association Name="FK_pokatyshki_poverhnosti">
+          <End Role="poverhnosti" Type="Self.poverhnosti" Multiplicity="0..1" />
+          <End Role="pokatyshki" Type="Self.pokatyshki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="poverhnosti">
+              <PropertyRef Name="cod_poverhnosti" />
+            </Principal>
+            <Dependent Role="pokatyshki">
+              <PropertyRef Name="cod_poverhnosti" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_uchastie_pokatyshki">
+          <End Role="pokatyshki" Type="Self.pokatyshki" Multiplicity="1" />
+          <End Role="uchastie" Type="Self.uchastie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pokatyshki">
+              <PropertyRef Name="cod_pokatyshek" />
+            </Principal>
+            <Dependent Role="uchastie">
+              <PropertyRef Name="kod_pokatushek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_uchastie_ychastnik1">
+          <End Role="ychastnik" Type="Self.ychastnik" Multiplicity="1" />
+          <End Role="uchastie" Type="Self.uchastie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ychastnik">
+              <PropertyRef Name="cod_ucastnika" />
+            </Principal>
+            <Dependent Role="uchastie">
+              <PropertyRef Name="kod_uchastnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище veloclubModelContainer">
+          <EntitySet Name="pokatyshki" EntityType="Self.pokatyshki" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="poverhnosti" EntityType="Self.poverhnosti" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="uchastie" EntityType="Self.uchastie" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ychastnik" EntityType="Self.ychastnik" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_pokatyshki_poverhnosti" Association="Self.FK_pokatyshki_poverhnosti">
+            <End Role="poverhnosti" EntitySet="poverhnosti" />
+            <End Role="pokatyshki" EntitySet="pokatyshki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_uchastie_pokatyshki" Association="Self.FK_uchastie_pokatyshki">
+            <End Role="pokatyshki" EntitySet="pokatyshki" />
+            <End Role="uchastie" EntitySet="uchastie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_uchastie_ychastnik1" Association="Self.FK_uchastie_ychastnik1">
+            <End Role="ychastnik" EntitySet="ychastnik" />
+            <End Role="uchastie" EntitySet="uchastie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="veloclubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="pokatyshki">
+          <Key>
+            <PropertyRef Name="cod_pokatyshek" />
+          </Key>
+          <Property Name="cod_pokatyshek" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nazvanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="col_vo_km" Type="Int32" />
+          <Property Name="data" Type="DateTime" Precision="0" />
+          <Property Name="dlitelnosti" Type="Int32" />
+          <Property Name="sred_skorosti" Type="Double" />
+          <Property Name="cod_poverhnosti" Type="Int32" />
+          <NavigationProperty Name="poverhnosti" Relationship="Self.FK_pokatyshki_poverhnosti" FromRole="pokatyshki" ToRole="poverhnosti" />
+          <NavigationProperty Name="uchastie" Relationship="Self.FK_uchastie_pokatyshki" FromRole="pokatyshki" ToRole="uchastie" />
+        </EntityType>
+        <EntityType Name="poverhnosti">
+          <Key>
+            <PropertyRef Name="cod_poverhnosti" />
+          </Key>
+          <Property Name="tip_poverhnosti" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="cod_poverhnosti" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="pokatyshki" Relationship="Self.FK_pokatyshki_poverhnosti" FromRole="poverhnosti" ToRole="pokatyshki" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="uchastie">
+          <Key>
+            <PropertyRef Name="kod_registracii" />
+          </Key>
+          <Property Name="kod_pokatushek" Type="Int32" Nullable="false" />
+          <Property Name="kod_uchastnika" Type="Int32" Nullable="false" />
+          <Property Name="kod_registracii" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="pokatyshki" Relationship="Self.FK_uchastie_pokatyshki" FromRole="uchastie" ToRole="pokatyshki" />
+          <NavigationProperty Name="ychastnik" Relationship="Self.FK_uchastie_ychastnik1" FromRole="uchastie" ToRole="ychastnik" />
+        </EntityType>
+        <EntityType Name="ychastnik">
+          <Key>
+            <PropertyRef Name="cod_ucastnika" />
+          </Key>
+          <Property Name="cod_ucastnika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="familia" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="otchestvo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tip_velo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stagh" Type="Int32" />
+          <NavigationProperty Name="uchastie" Relationship="Self.FK_uchastie_ychastnik1" FromRole="ychastnik" ToRole="uchastie" />
+        </EntityType>
+        <Association Name="FK_pokatyshki_poverhnosti">
+          <End Role="poverhnosti" Type="Self.poverhnosti" Multiplicity="0..1" />
+          <End Role="pokatyshki" Type="Self.pokatyshki" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="poverhnosti">
+              <PropertyRef Name="cod_poverhnosti" />
+            </Principal>
+            <Dependent Role="pokatyshki">
+              <PropertyRef Name="cod_poverhnosti" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_uchastie_pokatyshki">
+          <End Role="pokatyshki" Type="Self.pokatyshki" Multiplicity="1" />
+          <End Role="uchastie" Type="Self.uchastie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="pokatyshki">
+              <PropertyRef Name="cod_pokatyshek" />
+            </Principal>
+            <Dependent Role="uchastie">
+              <PropertyRef Name="kod_pokatushek" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_uchastie_ychastnik1">
+          <End Role="ychastnik" Type="Self.ychastnik" Multiplicity="1" />
+          <End Role="uchastie" Type="Self.uchastie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ychastnik">
+              <PropertyRef Name="cod_ucastnika" />
+            </Principal>
+            <Dependent Role="uchastie">
+              <PropertyRef Name="kod_uchastnika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="veloclubEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="pokatyshki" EntityType="Self.pokatyshki" />
+          <EntitySet Name="poverhnosti" EntityType="Self.poverhnosti" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="uchastie" EntityType="Self.uchastie" />
+          <EntitySet Name="ychastnik" EntityType="Self.ychastnik" />
+          <AssociationSet Name="FK_pokatyshki_poverhnosti" Association="Self.FK_pokatyshki_poverhnosti">
+            <End Role="poverhnosti" EntitySet="poverhnosti" />
+            <End Role="pokatyshki" EntitySet="pokatyshki" />
+          </AssociationSet>
+          <AssociationSet Name="FK_uchastie_pokatyshki" Association="Self.FK_uchastie_pokatyshki">
+            <End Role="pokatyshki" EntitySet="pokatyshki" />
+            <End Role="uchastie" EntitySet="uchastie" />
+          </AssociationSet>
+          <AssociationSet Name="FK_uchastie_ychastnik1" Association="Self.FK_uchastie_ychastnik1">
+            <End Role="ychastnik" EntitySet="ychastnik" />
+            <End Role="uchastie" EntitySet="uchastie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище veloclubModelContainer" CdmEntityContainer="veloclubEntities">
+          <EntitySetMapping Name="pokatyshki">
+            <EntityTypeMapping TypeName="veloclubModel.pokatyshki">
+              <MappingFragment StoreEntitySet="pokatyshki">
+                <ScalarProperty Name="cod_pokatyshek" ColumnName="cod_pokatyshek" />
+                <ScalarProperty Name="nazvanie" ColumnName="nazvanie" />
+                <ScalarProperty Name="col_vo_km" ColumnName="col_vo_km" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="dlitelnosti" ColumnName="dlitelnosti" />
+                <ScalarProperty Name="sred_skorosti" ColumnName="sred_skorosti" />
+                <ScalarProperty Name="cod_poverhnosti" ColumnName="cod_poverhnosti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="poverhnosti">
+            <EntityTypeMapping TypeName="veloclubModel.poverhnosti">
+              <MappingFragment StoreEntitySet="poverhnosti">
+                <ScalarProperty Name="tip_poverhnosti" ColumnName="tip_poverhnosti" />
+                <ScalarProperty Name="cod_poverhnosti" ColumnName="cod_poverhnosti" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="veloclubModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uchastie">
+            <EntityTypeMapping TypeName="veloclubModel.uchastie">
+              <MappingFragment StoreEntitySet="uchastie">
+                <ScalarProperty Name="kod_pokatushek" ColumnName="kod_pokatushek" />
+                <ScalarProperty Name="kod_uchastnika" ColumnName="kod_uchastnika" />
+                <ScalarProperty Name="kod_registracii" ColumnName="kod_registracii" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ychastnik">
+            <EntityTypeMapping TypeName="veloclubModel.ychastnik">
+              <MappingFragment StoreEntitySet="ychastnik">
+                <ScalarProperty Name="cod_ucastnika" ColumnName="cod_ucastnika" />
+                <ScalarProperty Name="familia" ColumnName="familia" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+                <ScalarProperty Name="tip_velo" ColumnName="tip_velo" />
+                <ScalarProperty Name="stagh" ColumnName="stagh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

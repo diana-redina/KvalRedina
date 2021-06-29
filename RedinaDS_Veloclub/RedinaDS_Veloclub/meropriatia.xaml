@@ -1,0 +1,96 @@
+﻿<Page x:Class="RedinaDS_Veloclub.meropriatia"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:RedinaDS_Veloclub"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000"
+      Title="meropriatia">
+
+    <Grid>
+        <DataGrid CanUserAddRows="False"  AutoGenerateColumns="False" x:Name="meropGrid" HorizontalAlignment="Left" Height="511" Margin="0,79,0,0" VerticalAlignment="Top" Width="798"  >
+            <DataGrid.Columns>
+
+
+
+                <DataGridTemplateColumn Header="Название">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label   Content="{Binding nazvanie}"   Height="60" Background="{x:Null}"   >
+
+                            </Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="кол-во км">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding col_vo_km}"  Height="60" Background="{x:Null}"  >
+
+                            </Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="дата">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding data}"  Height="60" Background="{x:Null}"  >
+                            </Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+
+                <DataGridTemplateColumn Header="длительность в часах">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding dlitelnosti}"  Height="60" Background="{x:Null}"  >
+
+                            </Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="средняя скорость">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding sred_skorosti}"  Height="60" Background="{x:Null}"  />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Посмотреть тип поверхности">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Button_tip_Click" Uid="{Binding cod_pokatyshek}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Удалить событие">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Uid="{Binding cod_pokatyshek}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Редактировать">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="Button_redact_Click" Uid="{Binding cod_pokatyshek}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button Content="Добавить событие" Uid="{Binding cod_pokatyshek}" HorizontalAlignment="Left" Margin="803,119,0,0" VerticalAlignment="Top" Width="137" Height="55" />
+        <Button Content="Назад"  HorizontalAlignment="Left" Margin="63,10,0,0" VerticalAlignment="Top" Width="90" Click="Button_nazad_Click"/>
+    </Grid>
+</Page>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище veloclubModelContainer" CdmEntityContainer="veloclubEntities">
+    <EntitySetMapping Name="pokatyshki">
+      <EntityTypeMapping TypeName="veloclubModel.pokatyshki">
+        <MappingFragment StoreEntitySet="pokatyshki">
+          <ScalarProperty Name="cod_pokatyshek" ColumnName="cod_pokatyshek" />
+          <ScalarProperty Name="nazvanie" ColumnName="nazvanie" />
+          <ScalarProperty Name="col_vo_km" ColumnName="col_vo_km" />
+          <ScalarProperty Name="data" ColumnName="data" />
+          <ScalarProperty Name="dlitelnosti" ColumnName="dlitelnosti" />
+          <ScalarProperty Name="sred_skorosti" ColumnName="sred_skorosti" />
+          <ScalarProperty Name="cod_poverhnosti" ColumnName="cod_poverhnosti" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="poverhnosti">
+      <EntityTypeMapping TypeName="veloclubModel.poverhnosti">
+        <MappingFragment StoreEntitySet="poverhnosti">
+          <ScalarProperty Name="tip_poverhnosti" ColumnName="tip_poverhnosti" />
+          <ScalarProperty Name="cod_poverhnosti" ColumnName="cod_poverhnosti" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="veloclubModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="uchastie">
+      <EntityTypeMapping TypeName="veloclubModel.uchastie">
+        <MappingFragment StoreEntitySet="uchastie">
+          <ScalarProperty Name="kod_pokatushek" ColumnName="kod_pokatushek" />
+          <ScalarProperty Name="kod_uchastnika" ColumnName="kod_uchastnika" />
+          <ScalarProperty Name="kod_registracii" ColumnName="kod_registracii" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ychastnik">
+      <EntityTypeMapping TypeName="veloclubModel.ychastnik">
+        <MappingFragment StoreEntitySet="ychastnik">
+          <ScalarProperty Name="cod_ucastnika" ColumnName="cod_ucastnika" />
+          <ScalarProperty Name="familia" ColumnName="familia" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="otchestvo" ColumnName="otchestvo" />
+          <ScalarProperty Name="tip_velo" ColumnName="tip_velo" />
+          <ScalarProperty Name="stagh" ColumnName="stagh" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
